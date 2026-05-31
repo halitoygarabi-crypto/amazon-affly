@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astraea - Faceless Amazon Affiliate & Hermes AI OS Suite</title>
+  
+  <!-- Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Styling -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- App Wrapper -->
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo-orb"></div>
+        <h1>ASTRAEA</h1>
+      </div>
+      
+      <div class="agent-badge">
+        <span class="pulse-indicator online"></span>
+        <span class="badge-text" id="sidebar-agent-status">Hermes v0.15: Online</span>
+      </div>
+      
+      <nav class="nav-menu">
+        <button class="nav-btn active" data-tab="dashboard">
+          <svg class="nav-icon" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          Genel Bakış
+        </button>
+        <button class="nav-btn" data-tab="guide">
+          <svg class="nav-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Kurulum Kılavuzu
+        </button>
+        <button class="nav-btn" data-tab="analyzer">
+          <svg class="nav-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+          Niş & Gelir Hesaplayıcı
+        </button>
+        <button class="nav-btn" data-tab="generator">
+          <svg class="nav-icon" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-1.3l-.85-.6C7.8 13.1 7 11.14 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.14-.8 4.1-2.15 5.1z"/></svg>
+          AI Video Stüdyosu
+        </button>
+        <button class="nav-btn" data-tab="repurpose">
+          <svg class="nav-icon" viewBox="0 0 24 24"><path d="M17 17H7v-3l-4 4 4 4v-3h12v-6h-2v4zM7 7h10v3l4-4-4-4v3H5v6h2V7z"/></svg>
+          Dağıtım Paneli
+        </button>
+        <button class="nav-btn" data-tab="hermes">
+          <svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 10.12h-6.78l.83-8.12L5 13.88h6.78l-.83 8.12z"/></svg>
+          Hermes Agentic OS
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="target-title">Hedef: $70,000 Pasif Gelir</div>
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="sidebar-progress-fill" style="width: 0%;"></div>
+        </div>
+        <div class="progress-info">
+          <span id="sidebar-progress-percent">0% Tamamlandı</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Header -->
+      <header class="header">
+        <div class="header-left">
+          <h2 id="current-tab-title">Genel Bakış</h2>
+          <p id="current-tab-desc" class="text-muted">Astraea Faceless AI Amazon Otomasyon Sistemi performans paneli.</p>
+        </div>
+        
+        <div class="header-right">
+          <!-- Notification Bell -->
+          <div class="header-action notification-bell" id="bell-trigger">
+            <svg class="bell-icon" viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 4.36 6 6.92 6 10v5l-2 2v1h16v-1l-2-2z"/></svg>
+            <span class="bell-badge" id="bell-badge">2</span>
+            
+            <div class="notification-dropdown" id="notification-dropdown">
+              <div class="dropdown-header">Bildirimler</div>
+              <div class="dropdown-list" id="dropdown-list">
+                <div class="dropdown-item unread">
+                  <div class="item-title">Hermes Ajanı Hazır</div>
+                  <div class="item-desc">Hermes Agent v0.15 Velocity sürümüne başarıyla güncellendi. Sistem hızı optimize edildi.</div>
+                  <div class="item-time">5 dakika önce</div>
+                </div>
+                <div class="dropdown-item unread">
+                  <div class="item-title">Pinterest Otomasyonu</div>
+                  <div class="item-desc">Amazon Affiliate linkleriniz Repurpose.io üzerinden Pinterest pinlerine başarıyla enjekte edildi.</div>
+                  <div class="item-time">1 saat önce</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- System Speed Badge -->
+          <div class="header-speed-badge">
+            <span class="speed-label">Başlangıç Hızı:</span>
+            <span class="speed-value" id="header-boot-speed">0.68s (Trimmed)</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Active Content Container -->
+      <div class="content-body">
+        
+        <!-- ==================== TAB: DASHBOARD ==================== -->
+        <section class="tab-content active" id="tab-dashboard">
+          <!-- Milestone Overview Cards -->
+          <div class="stats-grid">
+            <div class="stat-card border-cyan">
+              <div class="stat-header">
+                <span class="stat-title text-muted">30 Günlük Kazanç</span>
+                <span class="badge badge-cyan">Hedef 1</span>
+              </div>
+              <div class="stat-val">$100.00</div>
+              <div class="stat-footer text-muted">Yüz Göstermeden ilk komisyon geliri</div>
+            </div>
+            
+            <div class="stat-card border-purple">
+              <div class="stat-header">
+                <span class="stat-title text-muted">90 Günlük Kazanç</span>
+                <span class="badge badge-purple">Hedef 2</span>
+              </div>
+              <div class="stat-val">$600.00</div>
+              <div class="stat-footer text-muted">Organik büyüme ve ivme kazanımı</div>
+            </div>
+
+            <div class="stat-card border-pink">
+              <div class="stat-header">
+                <span class="stat-title text-muted">Son 12 Aylık Kazanç</span>
+                <span class="badge badge-pink">Hedef 3</span>
+              </div>
+              <div class="stat-val">$17,450.00</div>
+              <div class="stat-footer text-muted">Ajan sürüleri ve çoklu dağıtım etkisi</div>
+            </div>
+
+            <div class="stat-card border-green">
+              <div class="stat-header">
+                <span class="stat-title text-muted">Toplam Gelir (Lifetime)</span>
+                <span class="badge badge-green">Erişilen</span>
+              </div>
+              <div class="stat-val">$70,120.00</div>
+              <div class="stat-footer text-muted">7/24 Arka planda çalışan tam otonom sistem</div>
+            </div>
+          </div>
+
+          <div class="dashboard-layout">
+            <!-- Left Side: Interactive Progress & System Status -->
+            <div class="card glass-panel">
+              <h3 class="card-title">Yapay Zeka Otomasyon Durumu</h3>
+              <div class="status-list">
+                <div class="status-item">
+                  <div class="status-info">
+                    <span class="status-name">Amazon Associates Hesabı</span>
+                    <span class="status-state text-green">Bağlandı</span>
+                  </div>
+                  <div class="status-indicator-bar bg-green"></div>
+                </div>
+                <div class="status-item">
+                  <div class="status-info">
+                    <span class="status-name">Hermes Agent v0.15 Engine</span>
+                    <span class="status-state text-purple">Aktif (Swarms Online)</span>
+                  </div>
+                  <div class="status-indicator-bar bg-purple"></div>
+                </div>
+                <div class="status-item">
+                  <div class="status-info">
+                    <span class="status-name">Repurpose.io Pipeline</span>
+                    <span class="status-state text-cyan">134+ Kanal Yönlendirmesi Aktif</span>
+                  </div>
+                  <div class="status-indicator-bar bg-cyan"></div>
+                </div>
+                <div class="status-item">
+                  <div class="status-info">
+                    <span class="status-name">Ödeme Altyapısı & Banka Tanımı</span>
+                    <span class="status-state text-green">Doğrulandı (Direct Deposit)</span>
+                  </div>
+                  <div class="status-indicator-bar bg-green"></div>
+                </div>
+              </div>
+              
+              <div class="system-coaching-box">
+                <div class="coaching-icon">🎓</div>
+                <div class="coaching-text">
+                  <strong>AI Profit Board İpucu:</strong> Hermes v0.15 ile entegre olan <code>browser.sh</code> katalog becerisini kullanarak, niş analizi yaparken Best Sellers listelerini ajana kazıtabilir ve en çok kazandıran ürünleri anında belirleyebilirsiniz.
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Side: Fast Actions & Launch Station -->
+            <div class="card glass-panel flex-column-space">
+              <div>
+                <h3 class="card-title">Hızlı İşlemler</h3>
+                <p class="text-muted">Astraea otomasyon ekosistemini anında tetikleyin.</p>
+              </div>
+              
+              <div class="fast-actions-grid">
+                <button class="fast-action-btn border-cyan" onclick="switchTab('analyzer')">
+                  <span class="action-icon">📊</span>
+                  <span class="action-name">Niş Analizi</span>
+                </button>
+                <button class="fast-action-btn border-purple" onclick="switchTab('generator')">
+                  <span class="action-icon">✍️</span>
+                  <span class="action-name">Senaryo Üret</span>
+                </button>
+                <button class="fast-action-btn border-pink" onclick="switchTab('repurpose')">
+                  <span class="action-icon">🌐</span>
+                  <span class="action-name">Dağıtımı Başlat</span>
+                </button>
+                <button class="fast-action-btn border-green" onclick="switchTab('hermes')">
+                  <span class="action-icon">🤖</span>
+                  <span class="action-name">Hermes OS</span>
+                </button>
+              </div>
+
+              <div class="quick-status-console">
+                <div class="console-title text-muted">Hermes Ajanı Son Sistem Logu:</div>
+                <div class="console-text" id="dashboard-console-log">Awaiting command... Type 'help' in Hermes OS terminal to query the swarm.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB: GUIDE ==================== -->
+        <section class="tab-content" id="tab-guide">
+          <div class="guide-header">
+            <div class="guide-progress-card glass-panel">
+              <div class="progress-ring-container">
+                <!-- Circular progress SVG -->
+                <svg class="progress-ring" width="120" height="120">
+                  <circle class="progress-ring-bg" stroke="rgba(255,255,255,0.05)" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"/>
+                  <circle class="progress-ring-circle" id="guide-progress-ring" stroke="var(--cyan-primary)" stroke-width="8" fill="transparent" r="50" cx="60" cy="60" stroke-dasharray="314.16" stroke-dashoffset="314.16"/>
+                </svg>
+                <div class="progress-ring-text" id="guide-progress-text">0%</div>
+              </div>
+              <div class="progress-ring-desc">
+                <h3>Kurulum İlerleme Seviyesi</h3>
+                <p class="text-muted">7/24 kazanç sağlayan faceless affiliate otomasyonunuzu kurmak için adımları takip edin. Tüm ilerlemeniz tarayıcınızda saklanır.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="guide-accordion-container">
+            <!-- STEP 1 -->
+            <div class="accordion-item glass-panel" id="guide-step-1">
+              <div class="accordion-header" onclick="toggleAccordion('guide-step-1')">
+                <span class="accordion-number">01</span>
+                <span class="accordion-title">Amazon Associates Kaydı & Kurulumu</span>
+                <span class="accordion-icon">▼</span>
+              </div>
+              <div class="accordion-content">
+                <p>İlk pasif gelirinizi kazanmak için Amazon Satış Ortaklığı programına kayıt olmanız gerekir.</p>
+                <div class="task-checklist">
+                  <label class="checkbox-label">
+                    <input type="checkbox" class="guide-checkbox" data-task-id="a_assoc_account">
+                    <span class="custom-checkbox"></span>
+                    <span>Aktif bir Amazon hesabı ile <a href="https://affiliate-program.amazon.com/" target="_blank" class="text-cyan">Amazon Associates</a> portalına üye olun.</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" class="guide-checkbox" data-task-id="a_target_country">
+                    <span class="custom-checkbox"></span>
+                    <span>Hedef satış pazarınızı belirleyin (Örn: ABD pazarı yüksek hacim için idealdir).</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" class="guide-checkbox" data-task-id="a_payment_method">
+                    <span class="custom-checkbox"></span>
+                    <span>Hak edişleri almak için ödeme altyapısını ("Update payment method") tanımlayın (Direct deposit/Banka/Gift Card).</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="accordion-item glass-panel" id="guide-step-2">
+              <div class="accordion-header" onclick="toggleAccordion('guide-step-2')">
+                <span class="accordion-number">02</span>
+                <span class="accordion-title">Niş Analizi & Çok Satan Ürün Keşfi</span>
+                <span class="accordion-icon">▼</span>
+              </div>
+              <div class="accordion-content">
+                <p>Hızlı kazanç için hem komisyon oranı yüksek hem de talep gören niş kategorileri belirleyin.</p>
+                <div class="task-checklist">
+                  <label class="checkbox-label">
+                    <input type="checkbox" class="guide-checkbox" data-task-id="n_analyzer">
+                    <span class="custom-checkbox"></span>
+                    <span>Astraea Niş Hesaplayıcısını kullanarak farklı kategorilerin potansiyel kazançlarını karşılaştırın.</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" class="guide-checkbox" data-task-id="n_best_sellers">
+                    <span class="custom-checkbox"></span>
+                    <span>Amazon Best Sellers veya AMZ Scout verileri üzerinden en çok satan ilk 5 ürünü listelerinize ekleyin.</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" class="guide-checkbox" data-task-id="n_affiliate_links">
+                    <span class="custom-checkbox"></span>
+                    <span>Amazon sayfasının üstündeki "Get Link" panelinden ürünlerinize özel takip kodlu kısa linklerinizi kopyalayın.</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="accordion-item glass-panel" id="guide-step-3">
+              <div class="accordion-header" onclick="toggleAccordion('guide-step-3')">
+                <span class="accordion-number">03</span>
+                <span class="accordion-title">Yapay Zeka ile Video İçeriği Üretimi</span>
+                <span class="accordion-icon">▼</span>
+              </div>
+              <div class="accordion-content">
+                <p>Yüzünüzü göstermeden, saniyeler içinde viral olabilecek ürün tanıtım videoları hazırlayın.</p>
+                <div class="task-checklist">
+                  <label class="checkbox-label">
+                    <input type="checkbox" class="guide-checkbox" data-task-id="v_script_gen">
+                    <span class="custom-checkbox"></span>
+                    <span>Astraea AI Video Stüdyosunu kullanarak ürününüz için yüksek CTR odaklı problem-çözüm senaryosu oluşturun.</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" class="guide-checkbox" data-task-id="v_heygen_render">
+                    <span class="custom-checkbox"></span>
+                    <span>Oluşturulan HeyGen promptu ile yüzünüzü göstermeden ürün tanıtım manken videosunu (Product Placement) render edin.</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" class="guide-checkbox" data-task-id="v_captions_edit">
+                    <span class="custom-checkbox"></span>
+                    <span>Captions.ai editörüne videonuzu ekleyin; altyazı, ses efekti ve altyazı renk ayarlarını tamamlayın.</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 4 -->
+            <div class="accordion-item glass-panel" id="guide-step-4">
+              <div class="accordion-header" onclick="toggleAccordion('guide-step-4')">
+                <span class="accordion-number">04</span>
+                <span class="accordion-title">Repurpose.io Otomasyon Yapılandırması</span>
+                <span class="accordion-icon">▼</span>
+              </div>
+              <div class="accordion-content">
+                <p>Videoları 134+ sosyal medya platformuna otomatik olarak dağıtan otomasyon köprülerini kurun.</p>
+                <div class="task-checklist">
+                  <label class="checkbox-label">
+                    <input type="checkbox" class="guide-checkbox" data-task-id="r_repurpose_acc">
+                    <span class="custom-checkbox"></span>
+                    <span>Repurpose.io platformuna üye olun ve ana kaynak (Örn: Instagram Reels) hesabınızı bağlayın.</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" class="guide-checkbox" data-task-id="r_routing_links">
+                    <span class="custom-checkbox"></span>
+                    <span>Destinasyon ağlarını (YouTube Shorts, Pinterest, Snapchat vb.) ekleyerek watermark kaldırma kurallarını aktif edin.</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" class="guide-checkbox" data-task-id="r_pinterest_redirect">
+                    <span class="custom-checkbox"></span>
+                    <span>Repurpose routing ayarlarındaki "Default Pinterest Link" alanına Amazon Associates linkinizi yapıştırın.</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 5 -->
+            <div class="accordion-item glass-panel" id="guide-step-5">
+              <div class="accordion-header" onclick="toggleAccordion('guide-step-5')">
+                <span class="accordion-number">05</span>
+                <span class="accordion-title">Hermes Agent v0.15 Aktifleştirme & Ölçekleme</span>
+                <span class="accordion-icon">▼</span>
+              </div>
+              <div class="accordion-content">
+                <p>Sistemi 7/24 otonom çalışacak şekilde Hermes Ajanı ve Ajan Sürülerine emanet edin.</p>
+                <div class="task-checklist">
+                  <label class="checkbox-label">
+                    <input type="checkbox" class="guide-checkbox" data-task-id="h_fast_boot">
+                    <span class="custom-checkbox"></span>
+                    <span>Hermes Agent v0.15 "Fast Boot" testini gerçekleştirerek sistem başlangıcını 1 saniyenin altına indirin.</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" class="guide-checkbox" data-task-id="h_security_vault">
+                    <span class="custom-checkbox"></span>
+                    <span>BitWarden secrets manager bağlantısını simüle edin ve Prompt Injection korumasını devreye alın.</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" class="guide-checkbox" data-task-id="h_swarm_cron">
+                    <span class="custom-checkbox"></span>
+                    <span>Ajan sürüsü (Swarm) için günlük otomatik Amazon Ürün Avı ve içerik dağıtım görevlerini aktifleştirin.</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB: ANALYZER ==================== -->
+        <section class="tab-content" id="tab-analyzer">
+          <div class="analyzer-layout">
+            <!-- Left Panel: Sliders & Niche Loader -->
+            <div class="card glass-panel">
+              <h3 class="card-title">Simülatör Girdileri</h3>
+              <p class="text-muted">Amazon verilerinize göre parametreleri düzenleyerek pasif gelir projeksiyonlarını inceleyin.</p>
+              
+              <!-- Sliders Container -->
+              <div class="sliders-container">
+                <div class="slider-group">
+                  <div class="slider-label">
+                    <span>Ortalama Ürün Fiyatı ($)</span>
+                    <span class="slider-value" id="val-price">$50</span>
+                  </div>
+                  <input type="range" id="slide-price" min="10" max="1000" value="50" step="5" class="custom-slider">
+                </div>
+
+                <div class="slider-group">
+                  <div class="slider-label">
+                    <span>Kategori Komisyon Oranı (%)</span>
+                    <span class="slider-value" id="val-commission">6%</span>
+                  </div>
+                  <input type="range" id="slide-commission" min="1" max="20" value="6" step="0.5" class="custom-slider">
+                </div>
+
+                <div class="slider-group">
+                  <div class="slider-label">
+                    <span>Günlük Toplam Video İzlenmesi</span>
+                    <span class="slider-value" id="val-views">50,000</span>
+                  </div>
+                  <input type="range" id="slide-views" min="1000" max="1000000" value="50000" step="1000" class="custom-slider">
+                </div>
+
+                <div class="slider-group">
+                  <div class="slider-label">
+                    <span>Link Tıklama Oranı (CTR %)</span>
+                    <span class="slider-value" id="val-ctr">1.5%</span>
+                  </div>
+                  <input type="range" id="slide-ctr" min="0.1" max="10" value="1.5" step="0.1" class="custom-slider">
+                </div>
+
+                <div class="slider-group">
+                  <div class="slider-label">
+                    <span>Satın Alım Dönüşüm Oranı (CR %)</span>
+                    <span class="slider-value" id="val-cr">2.0%</span>
+                  </div>
+                  <input type="range" id="slide-cr" min="0.1" max="15" value="2.0" step="0.1" class="custom-slider">
+                </div>
+              </div>
+
+              <!-- Niche Database presets -->
+              <div class="niche-db">
+                <h4 class="niche-db-title">Popüler Hazır Niş Kategorileri</h4>
+                <div class="niche-presets-grid">
+                  <button class="preset-card active" onclick="loadNichePreset(80, 10, 'Luxury Beauty')">
+                    <span class="preset-name">Lüks Kozmetik</span>
+                    <span class="preset-meta">10% Komisyon</span>
+                  </button>
+                  <button class="preset-card" onclick="loadNichePreset(35, 6, 'Baby Products')">
+                    <span class="preset-name">Bebek Ürünleri</span>
+                    <span class="preset-meta">6% Komisyon</span>
+                  </button>
+                  <button class="preset-card" onclick="loadNichePreset(120, 4, 'Tech Accessories')">
+                    <span class="preset-name">Teknoloji & Aksesuar</span>
+                    <span class="preset-meta">4% Komisyon</span>
+                  </button>
+                  <button class="preset-card" onclick="loadNichePreset(15, 4, 'Kindle eBooks')">
+                    <span class="preset-name">Kindle Kitapları</span>
+                    <span class="preset-meta">4% Komisyon</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Panel: Numbers & Animated SVG Graph -->
+            <div class="card glass-panel">
+              <h3 class="card-title">Kazanç Projeksiyonları</h3>
+              
+              <div class="projections-stats-grid">
+                <div class="proj-box">
+                  <span class="proj-title text-muted">Aylık Net Kazanç (30 Gün)</span>
+                  <span class="proj-value text-cyan" id="proj-30d">$450.00</span>
+                </div>
+                <div class="proj-box">
+                  <span class="proj-title text-muted">Çeyreklik Kazanç (90 Gün)</span>
+                  <span class="proj-value text-purple" id="proj-90d">$1,350.00</span>
+                </div>
+                <div class="proj-box">
+                  <span class="proj-title text-muted">Yıllık Pasif Gelir (12 Ay)</span>
+                  <span class="proj-value text-pink" id="proj-1y">$5,475.00</span>
+                </div>
+                <div class="proj-box">
+                  <span class="proj-title text-muted">5 Yıllık Kümülatif Gelir</span>
+                  <span class="proj-value text-green" id="proj-5y">$27,375.00</span>
+                </div>
+              </div>
+
+              <!-- Animated SVG Chart -->
+              <div class="chart-container">
+                <div class="chart-legend">
+                  <span class="legend-item"><span class="legend-color bg-pink"></span>Muhafazakar (x0.5)</span>
+                  <span class="legend-item"><span class="legend-color bg-cyan"></span>Modere (x1.0)</span>
+                  <span class="legend-item"><span class="legend-color bg-purple"></span>Hermes Swarm Otonom (x2.5)</span>
+                </div>
+                
+                <svg class="earnings-svg-chart" id="earnings-chart" viewBox="0 0 500 220">
+                  <!-- Grid Lines -->
+                  <line x1="50" y1="20" x2="480" y2="20" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+                  <line x1="50" y1="70" x2="480" y2="70" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+                  <line x1="50" y1="120" x2="480" y2="120" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+                  <line x1="50" y1="170" x2="480" y2="170" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+                  
+                  <!-- Y Axis Labels -->
+                  <text x="15" y="24" class="chart-axis-text">Max</text>
+                  <text x="15" y="99" class="chart-axis-text">Mid</text>
+                  <text x="15" y="174" class="chart-axis-text">Min</text>
+                  
+                  <!-- X Axis Labels -->
+                  <text x="50" y="195" class="chart-axis-text">0G</text>
+                  <text x="157" y="195" class="chart-axis-text">30G</text>
+                  <text x="264" y="195" class="chart-axis-text">90G</text>
+                  <text x="372" y="195" class="chart-axis-text">1 Yıl</text>
+                  <text x="470" y="195" class="chart-axis-text">5 Yıl</text>
+                  
+                  <!-- Dynamic SVG Paths (Updated via JS) -->
+                  <path id="chart-path-conservative" d="" fill="none" stroke="var(--pink-primary)" stroke-width="2.5" stroke-linecap="round" />
+                  <path id="chart-path-moderate" d="" fill="none" stroke="var(--cyan-primary)" stroke-width="2.5" stroke-linecap="round" />
+                  <path id="chart-path-swarm" d="" fill="none" stroke="var(--purple-primary)" stroke-width="2.5" stroke-linecap="round" />
+
+                  <!-- Axis lines -->
+                  <line x1="50" y1="20" x2="50" y2="180" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                  <line x1="50" y1="180" x2="480" y2="180" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB: GENERATOR ==================== -->
+        <section class="tab-content" id="tab-generator">
+          <div class="generator-layout">
+            <!-- Left Side: Prompt Creator Form -->
+            <div class="card glass-panel">
+              <h3 class="card-title">AI Senaryo Oluşturucu</h3>
+              <p class="text-muted">Tanıtmak istediğiniz Amazon ürününün detaylarını girin ve kanca (hook) yapısını seçin.</p>
+              
+              <form id="prompt-generator-form" onsubmit="generateScripts(event)">
+                <div class="form-group">
+                  <label for="prod-name" class="form-label">Ürün Adı / ASIN Kodu</label>
+                  <input type="text" id="prod-name" class="form-input" placeholder="Örn: Ergonomic Memory Foam Pillow" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="prod-hook" class="form-label">Birincil Fayda / Çözülen Problem</label>
+                  <input type="text" id="prod-hook" class="form-input" placeholder="Örn: Boyun ağrısını yok eder ve uyku kalitesini %90 artırır" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="prod-target" class="form-label">Hedef Kitle</label>
+                  <input type="text" id="prod-target" class="form-input" placeholder="Örn: Ofis çalışanları, uykusuzluk çekenler" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="prod-framework" class="form-label">Pazarlama Kurgusu (Framework)</label>
+                  <select id="prod-framework" class="form-input">
+                    <option value="problem-solution">Problem - Çözüm Kurgusu (Yüksek CTR)</option>
+                    <option value="top3">Neden Almalısınız? (En İyi 3 Neden Kurgusu)</option>
+                    <option value="aesthetic">Estetik Kutu Açılışı & İnceleme Kurgusu</option>
+                  </select>
+                </div>
+                
+                <button type="submit" class="submit-btn border-cyan">
+                  ⚡ Pazarlama Senaryoları & Promptları Üret
+                </button>
+              </form>
+            </div>
+
+            <!-- Right Side: Script and Prompts Outputs -->
+            <div class="card glass-panel">
+              <div class="output-tabs-header">
+                <button class="output-tab-btn active" data-out-tab="out-script" onclick="switchOutputTab('out-script')">🎬 Video Senaryosu (30-45s)</button>
+                <button class="output-tab-btn" data-out-tab="out-heygen" onclick="switchOutputTab('out-heygen')">👤 HeyGen Avatar Prompt</button>
+                <button class="output-tab-btn" data-out-tab="out-captions" onclick="switchOutputTab('out-captions')">📝 Captions.ai Stil</button>
+              </div>
+
+              <!-- Output: Video Script -->
+              <div class="output-tab-content active" id="out-script">
+                <div class="copy-header">
+                  <span class="text-muted text-small">Sosyal medya (Reels, TikTok, Shorts) seslendirmesi için hazır senaryo.</span>
+                  <button class="copy-btn" onclick="copyToClipboard('script-text-area')">Kopyala</button>
+                </div>
+                <div class="output-wrapper">
+                  <textarea id="script-text-area" class="output-textarea" readonly>Lütfen soldaki formu doldurup "Senaryo Üret" butonuna basın.</textarea>
+                </div>
+              </div>
+
+              <!-- Output: HeyGen Avatar Prompt -->
+              <div class="output-tab-content" id="out-heygen">
+                <div class="copy-header">
+                  <span class="text-muted text-small">HeyGen Product Placement AI Manken konuşma ve sahne yönlendirmesi.</span>
+                  <button class="copy-btn" onclick="copyToClipboard('heygen-text-area')">Kopyala</button>
+                </div>
+                <div class="output-wrapper">
+                  <textarea id="heygen-text-area" class="output-textarea" readonly>Lütfen soldaki formu doldurup "Senaryo Üret" butonuna basın.</textarea>
+                </div>
+              </div>
+
+              <!-- Output: Captions.ai Style Rules -->
+              <div class="output-tab-content" id="out-captions">
+                <div class="copy-header">
+                  <span class="text-muted text-small">Videonun sosyal medyada öne çıkması için altyazı, ses efekti ve edit talimatları.</span>
+                  <button class="copy-btn" onclick="copyToClipboard('captions-text-area')">Kopyala</button>
+                </div>
+                <div class="output-wrapper">
+                  <textarea id="captions-text-area" class="output-textarea" readonly>Lütfen soldaki formu doldurup "Senaryo Üret" butonuna basın.</textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB: REPURPOSE ==================== -->
+        <section class="tab-content" id="tab-repurpose">
+          <div class="repurpose-layout">
+            <!-- Left: Visual Pipeline Map -->
+            <div class="card glass-panel flex-column">
+              <h3 class="card-title">Repurpose.io Çoklu Dağıtım Ağı</h3>
+              <p class="text-muted">Videolarınızın kaynak platformlardan (Instagram Reels) diğer sosyal ağlara giden otonom dağıtım rotasını kontrol edin.</p>
+              
+              <!-- SVG Pipeline Map -->
+              <div class="pipeline-container">
+                <div class="pipeline-node source" id="node-instagram">
+                  <span class="node-logo">📸</span>
+                  <span class="node-name">Instagram Reels</span>
+                  <span class="node-status text-green">Source</span>
+                </div>
+
+                <div class="pipeline-svg-wrapper">
+                  <svg class="pipeline-svg" viewBox="0 0 260 220">
+                    <!-- Path lines connecting source to destinations -->
+                    <path id="path-tiktok" d="M 10 110 C 130 110, 130 30, 240 30" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+                    <path id="path-youtube" d="M 10 110 C 130 110, 130 80, 240 80" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+                    <path id="path-pinterest" d="M 10 110 C 130 110, 130 140, 240 140" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+                    <path id="path-snapchat" d="M 10 110 C 130 110, 130 190, 240 190" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+                  </svg>
+                </div>
+
+                <div class="destination-nodes">
+                  <div class="pipeline-node dest" id="node-tiktok">
+                    <span class="node-logo">🎵</span>
+                    <span class="node-name">TikTok</span>
+                    <span class="node-status text-muted" id="status-tiktok">Bağlantısız</span>
+                  </div>
+                  <div class="pipeline-node dest" id="node-youtube">
+                    <span class="node-logo">🎬</span>
+                    <span class="node-name">YouTube Shorts</span>
+                    <span class="node-status text-muted" id="status-youtube">Bağlantısız</span>
+                  </div>
+                  <div class="pipeline-node dest active" id="node-pinterest">
+                    <span class="node-logo">📌</span>
+                    <span class="node-name">Pinterest Pins</span>
+                    <span class="node-status text-cyan" id="status-pinterest">Bağlı</span>
+                  </div>
+                  <div class="pipeline-node dest" id="node-snapchat">
+                    <span class="node-logo">👻</span>
+                    <span class="node-name">Snapchat Spotlight</span>
+                    <span class="node-status text-muted" id="status-snapchat">Bağlantısız</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Channel Activators switches -->
+              <div class="account-toggles">
+                <h4 class="toggles-title">Dağıtım Kanallarını Bağla / Aktif Et</h4>
+                <div class="toggles-grid">
+                  <div class="toggle-control-item">
+                    <span>TikTok Dağıtımı</span>
+                    <label class="switch">
+                      <input type="checkbox" id="switch-tiktok" onchange="togglePipelineChannel('tiktok')">
+                      <span class="switch-slider round"></span>
+                    </label>
+                  </div>
+                  <div class="toggle-control-item">
+                    <span>YouTube Shorts</span>
+                    <label class="switch">
+                      <input type="checkbox" id="switch-youtube" onchange="togglePipelineChannel('youtube')">
+                      <span class="switch-slider round"></span>
+                    </label>
+                  </div>
+                  <div class="toggle-control-item">
+                    <span>Pinterest (Affiliate Entegrasyonlu)</span>
+                    <label class="switch">
+                      <input type="checkbox" id="switch-pinterest" checked onchange="togglePipelineChannel('pinterest')">
+                      <span class="switch-slider round"></span>
+                    </label>
+                  </div>
+                  <div class="toggle-control-item">
+                    <span>Snapchat Dağıtımı</span>
+                    <label class="switch">
+                      <input type="checkbox" id="switch-snapchat" onchange="togglePipelineChannel('snapchat')">
+                      <span class="switch-slider round"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Real-time logs simulation -->
+            <div class="card glass-panel flex-column-space">
+              <div>
+                <div class="flex-row-space">
+                  <h3 class="card-title">Otonom Dağıtım Logları</h3>
+                  <span class="pulse-indicator online anim-ping"></span>
+                </div>
+                <p class="text-muted">Repurpose.io API'sinden gelen anlık video dağıtım, filigran silme ve link enjeksiyon olay günlüğü.</p>
+              </div>
+
+              <div class="repurpose-logs-console" id="repurpose-logs-console">
+                <div class="log-entry"><span class="log-time">[10:09:40]</span> <span class="log-tag tag-system">[SYSTEM]</span> Pipeline monitoring started. Listening for Instagram Reels triggers...</div>
+                <div class="log-entry"><span class="log-time">[09:12:15]</span> <span class="log-tag tag-pinterest">[PINTEREST]</span> Successfully injected affiliate link (amzn.to/3xyz) to Pinterest Pin ID 88921.</div>
+                <div class="log-entry"><span class="log-time">[09:12:00]</span> <span class="log-tag tag-system">[SYSTEM]</span> Detected new Reel uploaded: "Ergonomic Memory Foam Pillow review". Starting automated routing.</div>
+              </div>
+              
+              <div class="routing-stats">
+                <div class="r-stat">
+                  <span class="r-stat-label text-muted">Aylık Toplam Paylaşım</span>
+                  <span class="r-stat-val">3,420 Post</span>
+                </div>
+                <div class="r-stat">
+                  <span class="r-stat-label text-muted">Filigransız İndirme Hızı</span>
+                  <span class="r-stat-val">0.45s / MB</span>
+                </div>
+                <div class="r-stat">
+                  <span class="r-stat-label text-muted">Link Enjeksiyon Başarısı</span>
+                  <span class="r-stat-val text-green">100%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB: HERMES ==================== -->
+        <section class="tab-content" id="tab-hermes">
+          <div class="hermes-grid">
+            
+            <!-- Row 1 Left: Hermes Status Card -->
+            <div class="card glass-panel">
+              <div class="flex-row-space">
+                <h3 class="card-title text-purple-glow">Nous-Hermes-v0.15 Engine</h3>
+                <span class="badge badge-purple" id="hermes-engine-badge">Active Swarm</span>
+              </div>
+              
+              <div class="hermes-stats-block">
+                <div class="h-stat-row">
+                  <span class="text-muted">Yapay Zeka Modeli:</span>
+                  <span class="h-stat-val">Nous-Hermes-3-Llama-3-70B</span>
+                </div>
+                <div class="h-stat-row">
+                  <span class="text-muted">Uptime (Sistem Süresi):</span>
+                  <span class="h-stat-val" id="hermes-uptime">2 saat 15 dakika</span>
+                </div>
+                <div class="h-stat-row">
+                  <span class="text-muted">Ajan Hafızası (Token):</span>
+                  <span class="h-stat-val">32,768 (Persistent Context)</span>
+                </div>
+                <div class="h-stat-row">
+                  <span class="text-muted">Telegram Kanal Entegrasyonu:</span>
+                  <span class="h-stat-val text-green" id="hermes-tg-status">Bağlantı Aktif (Online)</span>
+                </div>
+              </div>
+
+              <!-- Startup Refactor Simulator -->
+              <div class="boot-simulator-box">
+                <div class="flex-row-space">
+                  <div>
+                    <strong class="text-small">Velocity Boot Test (%76 Shrunk)</strong>
+                    <p class="text-muted text-small">16.000 satırdan temizlenmiş ultra hızlı açılış testi.</p>
+                  </div>
+                  <button class="boot-trigger-btn border-purple" id="boot-trigger" onclick="runBootTest()">
+                    Yeniden Başlat
+                  </button>
+                </div>
+                <div class="boot-progress-bar-bg" id="boot-progress-container" style="display: none;">
+                  <div class="boot-progress-bar-fill" id="boot-progress-fill"></div>
+                  <span class="boot-time-label" id="boot-time-val">0.00s</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 1 Right: Swarm and Triage Visualizer -->
+            <div class="card glass-panel">
+              <h3 class="card-title text-pink-glow">Ajan Sürüsü (Swarm) Triage & Paralel Yönetim</h3>
+              <p class="text-muted">Gelen tek bir talimatı analiz ederek, arka plandaki uzman alt ajanlara paralel iş olarak dağıtan triage yapısı.</p>
+              
+              <div class="triage-status-bar">
+                <span class="triage-badge">Triage Aşaması:</span>
+                <span class="triage-status-val text-cyan" id="triage-status-val">BEKLEMEDE (Awaiting input)</span>
+              </div>
+              
+              <div class="swarm-board-grid">
+                <div class="swarm-agent-card" id="agent-hunter">
+                  <div class="swarm-header">
+                    <span class="swarm-avatar">🕵️‍♂️</span>
+                    <div class="swarm-agent-meta">
+                      <strong>Amazon Hunter</strong>
+                      <span class="swarm-state state-idle" id="state-hunter">Idle</span>
+                    </div>
+                  </div>
+                  <div class="swarm-agent-desc">Niş Best Sellers analizi ve ASIN keşif ajanı.</div>
+                </div>
+
+                <div class="swarm-agent-card" id="agent-writer">
+                  <div class="swarm-header">
+                    <span class="swarm-avatar">✍️</span>
+                    <div class="swarm-agent-meta">
+                      <strong>Script Specialist</strong>
+                      <span class="swarm-state state-idle" id="state-writer">Idle</span>
+                    </div>
+                  </div>
+                  <div class="swarm-agent-desc">Kanca (Hook) ve HeyGen seslendirme senaryo ajanı.</div>
+                </div>
+
+                <div class="swarm-agent-card" id="agent-scheduler">
+                  <div class="swarm-header">
+                    <span class="swarm-avatar">⚙️</span>
+                    <div class="swarm-agent-meta">
+                      <strong>Repurpose Router</strong>
+                      <span class="swarm-state state-idle" id="state-scheduler">Idle</span>
+                    </div>
+                  </div>
+                  <div class="swarm-agent-desc">Filigran kaldırma ve sosyal dağıtım API tetikleyicisi.</div>
+                </div>
+
+                <div class="swarm-agent-card" id="agent-browser">
+                  <div class="swarm-header">
+                    <span class="swarm-avatar">🌐</span>
+                    <div class="swarm-agent-meta">
+                      <strong>Browser Use Agent</strong>
+                      <span class="swarm-state state-idle" id="state-browser">Idle</span>
+                    </div>
+                  </div>
+                  <div class="swarm-agent-desc"><code>browser.sh</code> katalog tarama ve inceleme kazıma ajanı.</div>
+                </div>
+              </div>
+
+              <!-- Comment Input for Swarm Directives -->
+              <div class="swarm-comment-box">
+                <input type="text" id="swarm-directive-input" class="swarm-comment-input" placeholder="Ajan sürüsüne doğrudan yönlendirme ekle... (Örn: Lüks kozmetik nişine odaklan)">
+                <button class="swarm-comment-btn" onclick="sendSwarmDirective()">Gönder</button>
+              </div>
+            </div>
+
+            <!-- Row 2 Left: Command Console (CLI & Chat) -->
+            <div class="card glass-panel hermes-terminal-panel">
+              <div class="flex-row-space terminal-header">
+                <span class="terminal-title">🖥️ HERMES TERMINAL SHELL - v0.15</span>
+                <div class="terminal-controls">
+                  <span class="control-dot red"></span>
+                  <span class="control-dot yellow"></span>
+                  <span class="control-dot green"></span>
+                </div>
+              </div>
+              
+              <!-- CLI Output Screen -->
+              <div class="terminal-screen" id="terminal-screen">
+                <div class="term-line">Nous Research Hermes Agent OS [Versiyon 0.15.226]</div>
+                <div class="term-line">Velocity Release 2026. (c) Nous Research Corp. Bütün hakları saklıdır.</div>
+                <div class="term-line">Kod tabanı %76 küçültüldü. Başlangıç hızı: 0.68s.</div>
+                <div class="term-line text-muted">Desteklenen komutları görmek için 'help' yazın. Ajanla doğrudan sohbet edebilirsiniz.</div>
+                <div class="term-line">&nbsp;</div>
+              </div>
+
+              <!-- CLI Input Form -->
+              <form id="terminal-form" class="terminal-input-form" onsubmit="executeTerminalCommand(event)">
+                <span class="terminal-prompt">hermes@astraea:~$</span>
+                <input type="text" id="terminal-input" class="terminal-input-field" autocomplete="off" placeholder="Komut yazın (Örn: hermes hunt --niche tech)">
+              </form>
+            </div>
+
+            <!-- Row 2 Right: Security, Search & Notification settings -->
+            <div class="card glass-panel flex-column-space">
+              <!-- Security Guard & BitWarden -->
+              <div class="settings-sub-card">
+                <div class="flex-row-space">
+                  <h4 class="settings-sec-title">🛡️ BitWarden Vault & Güvenlik Kalkanı</h4>
+                  <span class="badge badge-green" id="shield-badge">SHIELD ACTIVE</span>
+                </div>
+                <p class="text-muted text-small">Tüm API anahtarlarınız BitWarden Secrets Manager üzerinde güvenli bir kasada saklanır. Ajan her sorguda anahtarı anlık kasadan çeker.</p>
+                <div class="security-toggles">
+                  <div class="toggle-control-item">
+                    <span>Prompt Injection Kalkanı (Anti-Saldırı)</span>
+                    <label class="switch">
+                      <input type="checkbox" id="switch-shield" checked onchange="toggleShield()">
+                      <span class="switch-slider round"></span>
+                    </label>
+                  </div>
+                  <div class="toggle-control-item">
+                    <span>BitWarden Secrets Manager Entegrasyonu</span>
+                    <label class="switch">
+                      <input type="checkbox" id="switch-vault" checked>
+                      <span class="switch-slider round"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 20ms Session Search -->
+              <div class="settings-sub-card">
+                <h4 class="settings-sec-title">🔍 20ms Geçmiş Arama Motoru (Sıfır LLM Maliyeti)</h4>
+                <p class="text-muted text-small">v0.15 ile gelen LLM-bağımsız yerel indeks arama motoru. $0 API maliyetiyle anında sonuç verir.</p>
+                <div class="search-engine-box">
+                  <input type="text" id="session-search-input" class="search-input" placeholder="Geçmiş log veya sohbetleri arayın..." onkeyup="searchSessionLogs()">
+                  <span class="search-perf-badge" id="search-perf-badge" style="display: none;">20ms | 0 API Call</span>
+                </div>
+                <div class="search-results-list" id="search-results-list"></div>
+              </div>
+
+              <!-- Smart Push Notification Center -->
+              <div class="settings-sub-card">
+                <h4 class="settings-sec-title">🔔 Akıllı Anlık Bildirim Paneli (Ekran Bağımsızlığı)</h4>
+                <p class="text-muted text-small">Ajanlar otonom görevleri (Workspace) bitirdiğinde telefonunuza veya saatinize anlık ping atar.</p>
+                <div class="notification-checkboxes">
+                  <label class="checkbox-label text-small">
+                    <input type="checkbox" checked id="notify-desktop">
+                    <span class="custom-checkbox"></span>
+                    <span>Masaüstü Anlık Bildirimleri (Ping)</span>
+                  </label>
+                  <label class="checkbox-label text-small">
+                    <input type="checkbox" checked id="notify-telegram">
+                    <span class="custom-checkbox"></span>
+                    <span>Mobil Telegram Bot Bildirimleri</span>
+                  </label>
+                  <label class="checkbox-label text-small">
+                    <input type="checkbox" id="notify-watch">
+                    <span class="custom-checkbox"></span>
+                    <span>Akıllı Saat Alarm & Bildirimleri</span>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- JavaScript Logics -->
+  <script src="app.js"></script>
+</body>
+</html>
