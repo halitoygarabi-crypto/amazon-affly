@@ -658,11 +658,8 @@ function executeTerminalCommand(e) {
           const chatId = localStorage.getItem('astraea_tg_chatid');
           if (token && chatId && document.getElementById('notify-telegram').checked) {
             const text = `🕵️‍♂️ *Astraea Otonom Ürün Avcısı:*\n\nKategori: *${nicheArg.toUpperCase()}*\nASIN: *B08X123456*\nFiyat: *$75*\nKomisyon: *%8*\n\nBulunan ürün Astraea gelir hesaplayıcıya aktarıldı ve AI Video Stüdyosu için hazırlandı! 🤖📦`;
-            fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: 'Markdown' })
-            }).catch(e => console.error(e));
+            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}&parse_mode=Markdown`;
+            fetch(url).catch(e => console.error(e));
           }
         }, 1000);
       }, 1000);
@@ -842,11 +839,8 @@ function triggerSmartNotifications(taskName) {
     const chatId = localStorage.getItem('astraea_tg_chatid');
     if (token && chatId) {
       const text = `🤖 *Astraea Otonom Ajan Raporu:*\n\n"${taskName}" otonom görevi başarıyla tamamlandı! 7/24 çalışan sistem aktif. 🚀`;
-      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: 'Markdown' })
-      }).catch(e => console.error("Telegram notify failed", e));
+      const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}&parse_mode=Markdown`;
+      fetch(url).catch(e => console.error("Telegram notify failed", e));
     }
   }
 }
@@ -906,16 +900,9 @@ function sendRealTelegramTest() {
   showToast("📤 Telegram'a test mesajı gönderiliyor...");
   
   const message = "🤖 *Astraea Sistem Bildirimi:*\n\nTelegram bot bağlantınız başarıyla doğrulandı ve Astraea otomasyon ekosistemine entegre edildi! 🎉";
+  const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
   
-  fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: chatId,
-      text: message,
-      parse_mode: 'Markdown'
-    })
-  })
+  fetch(url)
   .then(res => res.json())
   .then(data => {
     if (data.ok) {
