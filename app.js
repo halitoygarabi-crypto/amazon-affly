@@ -709,13 +709,46 @@ function executeTerminalCommand(e) {
   else {
     const isLive = localStorage.getItem('astraea_live_api') === 'true';
     const apiKey = localStorage.getItem('astraea_or_api_key');
-    const selectedModel = localStorage.getItem('astraea_or_model') || 'nousresearch/hermes-3-llama-3-70b';
+    let selectedModel = localStorage.getItem('astraea_or_model') || 'auto-hybrid';
     
     if (isLive && apiKey) {
-      const modelShortName = selectedModel.split('/').pop().split(':')[0].toUpperCase();
-      appendTerminalLine("HERMES", `${modelShortName} canlı düşünce akışı başlatılıyor...`);
+      let activeModel = selectedModel;
+      let isHybridRouted = false;
+      let routingInfo = "";
       
-      const systemPrompt = selectedModel.includes("kimi")
+      if (selectedModel === 'auto-hybrid') {
+        isHybridRouted = true;
+        const lowerInput = cmdRaw.toLowerCase();
+        
+        // Creative / Copywriting Keywords (Hermes target)
+        const creativeKeywords = [
+          'yaz', 'senaryo', 'hook', 'kanca', 'metin', 'baslik', 'başlık', 
+          'heygen', 'captions', 'video', 'tanitim', 'tanıtım', 'reklam', 
+          'creative', 'copywriting', 'story', 'hikaye', 'slogan', 'social', 'sosyal',
+          'yaratici', 'yaratıcı', 'video', 'senarist', 'makale'
+        ];
+        
+        const matchesCreative = creativeKeywords.some(keyword => lowerInput.includes(keyword));
+        
+        if (matchesCreative) {
+          activeModel = "nousresearch/hermes-3-llama-3-70b";
+          routingInfo = "🔄 [HİBRİT YÖNLENDİRME] Konu: PAZARLAMA/YAZARLIK. Yaratıcı içerikler için Nous-Hermes-3 devreye giriyor...";
+        } else {
+          // Default to Moonshot Kimi K2.6 for reasoning/strategy
+          activeModel = "moonshotai/kimi-k2.6:free";
+          routingInfo = "🔄 [HİBRİT YÖNLENDİRME] Konu: STRATEJİ/ANALİZ. Mantıksal çıkarım için Moonshot Kimi K2.6 (Free MoE) devreye giriyor...";
+        }
+      }
+      
+      const modelShortName = activeModel.split('/').pop().split(':')[0].toUpperCase();
+      
+      if (isHybridRouted) {
+        appendTerminalLine("SYSTEM", routingInfo);
+      } else {
+        appendTerminalLine("HERMES", `${modelShortName} canlı düşünce akışı başlatılıyor...`);
+      }
+      
+      const systemPrompt = activeModel.includes("kimi")
         ? "Sen Astraea platformunun otonom Kimi K2.6 Yapay Zeka asistanısın. Moonshot AI tarafından geliştirilmiş ultra gelişmiş 1 trilyon parametreli MoE modelisin. Kullanıcının Amazon affiliate otomasyonu, yüz göstermeden video senaryosu üretimi, otonom ürün avcılığı ve sosyal medya dağıtım konularındaki sorularına teknik, profesyonel, zeki ve son derece detaylı yanıtlar ver."
         : "Sen Astraea platformunun Nous Hermes v0.15 Velocity yapay zeka asistanısın. Nous Research tarafından geliştirilmiş 70 milyar parametreli Llama 3 modelisin. Kullanıcının Amazon affiliate otomasyonu, yüz göstermeden video senaryosu üretimi, otonom ürün avcılığı ve sosyal medya dağıtım konularındaki sorularına teknik, profesyonel, zeki ve yardımcı yanıtlar ver.";
 
@@ -728,7 +761,7 @@ function executeTerminalCommand(e) {
           "X-Title": "Astraea Faceless AI OS"
         },
         body: JSON.stringify({
-          model: selectedModel,
+          model: activeModel,
           messages: [
             {
               role: "system",
@@ -748,8 +781,9 @@ function executeTerminalCommand(e) {
       .then(data => {
         if (data.choices && data.choices[0] && data.choices[0].message) {
           const reply = data.choices[0].message.content;
-          const senderName = selectedModel.includes("kimi") ? "KIMI-K2.6" : "HERMES";
-          appendTerminalLine(senderName, reply);
+          const senderName = activeModel.includes("kimi") ? "KIMI-K2.6" : "HERMES";
+          const displaySender = isHybridRouted ? `${senderName}-HYBRID` : senderName;
+          appendTerminalLine(displaySender, reply);
         } else if (data.error) {
           throw new Error(data.error.message || "OpenRouter API hatası.");
         } else {
@@ -763,7 +797,7 @@ function executeTerminalCommand(e) {
     } else {
       appendTerminalLine("HERMES", "Düşünüyor...");
       setTimeout(() => {
-        appendTerminalLine("HERMES", `Merhaba! Ben Nous Hermes v0.15 Velocity asistanınız. Komut satırına '${cmdRaw}' yazdınız. Bu otonom yapıda Amazon Associates kazançlarınızı katlamak için 'help' yazarak özel komutlarımı test edebilirsiniz!\n\n💡 İpucu: Sağ taraftan 'Canlı Yapay Zeka API Bağlantısı'nı aktif ederek gerçek bir Llama-3-70B veya Kimi K2.6 zekasıyla sohbet edebilirsiniz!`);
+        appendTerminalLine("HERMES", `Merhaba! Ben Nous Hermes v0.15 Velocity asistanınız. Komut satırına '${cmdRaw}' yazdınız. Bu otonom yapıda Amazon Associates kazançlarınızı katlamak için 'help' yazarak özel komutlarımı test edebilirsiniz!\n\n💡 İpucu: Sağ taraftan 'Canlı Yapay Zeka API Bağlantısı'nı aktif ederek Otomatik Hibrit Yönlendirme modunda Llama-3-70B ve Kimi K2.6'yı birlikte kullanabilirsiniz!`);
       }, 500);
     }
   }
@@ -984,7 +1018,7 @@ function setupLiveApiConfig() {
   
   const storedKey = localStorage.getItem('astraea_or_api_key');
   const storedLiveState = localStorage.getItem('astraea_live_api') === 'true';
-  const storedModel = localStorage.getItem('astraea_or_model') || 'nousresearch/hermes-3-llama-3-70b';
+  const storedModel = localStorage.getItem('astraea_or_model') || 'auto-hybrid';
   
   if (keyInput && storedKey) {
     keyInput.value = storedKey;
@@ -1012,7 +1046,7 @@ function saveModelSelection() {
   if (modelSelect) {
     const model = modelSelect.value;
     localStorage.setItem('astraea_or_model', model);
-    const modelShort = model.split('/').pop().split(':')[0].toUpperCase();
+    const modelShort = model === 'auto-hybrid' ? 'HİBRİT' : model.split('/').pop().split(':')[0].toUpperCase();
     showToast(`🎯 Aktif Model Seçildi: ${modelShort}`);
     appendTerminalLine("SYSTEM", `Active LLM agent model switched to: ${model}`);
   }
@@ -1034,10 +1068,10 @@ function toggleLiveApi() {
     localStorage.setItem('astraea_live_api', isChecked);
     
     if (isChecked) {
-      const selectedModel = localStorage.getItem('astraea_or_model') || 'nousresearch/hermes-3-llama-3-70b';
-      const modelShort = selectedModel.split('/').pop().split(':')[0].toUpperCase();
+      const selectedModel = localStorage.getItem('astraea_or_model') || 'auto-hybrid';
+      const modelShort = selectedModel === 'auto-hybrid' ? 'HİBRİT YÖNLENDİRME' : selectedModel.split('/').pop().split(':')[0].toUpperCase();
       showToast(`⚡ Canlı API Modu AKTİF (Model: ${modelShort})`);
-      appendTerminalLine("SUCCESS", `nous-hermes-v0.15 Engine LIVE mode activated. Connected via OpenRouter with ${modelShort}.`);
+      appendTerminalLine("SUCCESS", `nous-hermes-v0.15 Engine LIVE mode activated. Connected via OpenRouter with ${modelShort} mode.`);
     } else {
       showToast("🔌 Canlı API Modu devre dışı bırakıldı (Yerel Mod).");
       appendTerminalLine("SYSTEM", "Nous-Hermes-v0.15 Engine switched to local offline mode.");
