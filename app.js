@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupNotificationDropdown();
   setupRepurposeSimulationLogs();
   setupTelegramConfig();
+  setupLiveApiConfig();
   
   // Initial draw of the calculator SVG chart
   updateCalculatorProjections();
@@ -706,11 +707,58 @@ function executeTerminalCommand(e) {
     }, 800);
   } 
   else {
-    // Conversational fallback
-    appendTerminalLine("HERMES", "Düşünüyor...");
-    setTimeout(() => {
-      appendTerminalLine("HERMES", `Merhaba! Ben Nous Hermes v0.15 Velocity asistanınız. Komut satırına '${cmdRaw}' yazdınız. Bu otonom yapıda Amazon Associates kazançlarınızı katlamak için 'help' yazarak özel komutlarımı test edebilirsiniz!`);
-    }, 500);
+    const isLive = localStorage.getItem('astraea_live_api') === 'true';
+    const apiKey = localStorage.getItem('astraea_or_api_key');
+    
+    if (isLive && apiKey) {
+      appendTerminalLine("HERMES", "Nous-Hermes-3 canlı düşünce akışı başlatılıyor...");
+      
+      fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+          "HTTP-Referer": "http://jizrapqjsln9fcxn1334c7q3.84.8.252.241.sslip.io",
+          "X-Title": "Astraea Faceless AI OS"
+        },
+        body: JSON.stringify({
+          model: "nousresearch/hermes-3-llama-3-70b",
+          messages: [
+            {
+              role: "system",
+              content: "Sen Astraea platformunun Nous Hermes v0.15 Velocity yapay zeka asistanısın. Kullanıcının Amazon affiliate otomasyonu, yüz göstermeden video senaryosu üretimi, otonom ürün avcılığı ve sosyal medya dağıtım konularındaki sorularına teknik, profesyonel, zeki ve yardımcı yanıtlar ver."
+            },
+            {
+              role: "user",
+              content: cmdRaw
+            }
+          ]
+        })
+      })
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP Hata kodu: ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        if (data.choices && data.choices[0] && data.choices[0].message) {
+          const reply = data.choices[0].message.content;
+          appendTerminalLine("HERMES", reply);
+        } else if (data.error) {
+          throw new Error(data.error.message || "OpenRouter API hatası.");
+        } else {
+          throw new Error("API'den geçersiz veri yapısı döndü.");
+        }
+      })
+      .catch(err => {
+        appendTerminalLine("WARNING", `Canlı API Hatası: ${err.message}`);
+        showToast("❌ Canlı API bağlantısı başarısız oldu.");
+      });
+    } else {
+      appendTerminalLine("HERMES", "Düşünüyor...");
+      setTimeout(() => {
+        appendTerminalLine("HERMES", `Merhaba! Ben Nous Hermes v0.15 Velocity asistanınız. Komut satırına '${cmdRaw}' yazdınız. Bu otonom yapıda Amazon Associates kazançlarınızı katlamak için 'help' yazarak özel komutlarımı test edebilirsiniz!\n\n💡 İpucu: Sağ taraftan 'Canlı Yapay Zeka API Bağlantısı'nı aktif ederek gerçek bir Llama-3-70B zekasıyla sohbet edebilirsiniz!`);
+      }, 500);
+    }
   }
 }
 
@@ -917,4 +965,56 @@ function sendRealTelegramTest() {
     showToast("❌ Ağ hatası oluştu!");
     appendTerminalLine("WARNING", `Telegram Connection Error: ${err.message}`);
   });
+}
+
+// ==========================================================================
+// 9. REAL LLM API INTEGRATION CONTROLLERS (OPENROUTER)
+// ==========================================================================
+function setupLiveApiConfig() {
+  const keyInput = document.getElementById('or-api-key');
+  const switchInput = document.getElementById('switch-live-api');
+  
+  const storedKey = localStorage.getItem('astraea_or_api_key');
+  const storedLiveState = localStorage.getItem('astraea_live_api') === 'true';
+  
+  if (keyInput && storedKey) {
+    keyInput.value = storedKey;
+  }
+  
+  if (switchInput) {
+    switchInput.checked = storedLiveState;
+  }
+}
+
+function saveApiKey() {
+  const keyInput = document.getElementById('or-api-key');
+  if (keyInput) {
+    localStorage.setItem('astraea_or_api_key', keyInput.value.trim());
+    showToast("💾 API Anahtarı tarayıcıya güvenle kaydedildi.");
+  }
+}
+
+function toggleLiveApi() {
+  const switchInput = document.getElementById('switch-live-api');
+  const keyInput = document.getElementById('or-api-key');
+  
+  if (switchInput) {
+    const isChecked = switchInput.checked;
+    
+    if (isChecked && (!keyInput || !keyInput.value.trim())) {
+      showToast("⚠️ Lütfen önce geçerli bir OpenRouter API anahtarı girin!");
+      switchInput.checked = false;
+      return;
+    }
+    
+    localStorage.setItem('astraea_live_api', isChecked);
+    
+    if (isChecked) {
+      showToast("⚡ Canlı API Modu AKTİF (Model: Nous-Hermes-3-70B)");
+      appendTerminalLine("SUCCESS", "Nous-Hermes-v0.15 Engine LIVE mode activated. Connected to OpenRouter.");
+    } else {
+      showToast("🔌 Canlı API Modu devre dışı bırakıldı (Yerel Mod).");
+      appendTerminalLine("SYSTEM", "Nous-Hermes-v0.15 Engine switched to local offline mode.");
+    }
+  }
 }
