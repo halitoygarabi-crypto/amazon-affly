@@ -934,11 +934,20 @@
               <!-- Real LLM API Integration Card -->
               <div class="settings-sub-card border-purple" style="margin-bottom: 12px;">
                 <h4 class="settings-sec-title">🔑 Canlı Yapay Zeka API Bağlantısı</h4>
-                <p class="text-muted text-small">Hermes Terminalini gerçek OpenRouter API anahtarınız ile bağlayarak canlı Nous-Hermes-3-Llama-3-70B zeka akışını aktifleştirin.</p>
+                <p class="text-muted text-small">Hermes Terminalini gerçek OpenRouter API anahtarınız ile bağlayarak canlı zeka akışını aktifleştirin.</p>
                 
                 <div class="form-group" style="margin-bottom: 8px;">
                   <label class="form-label text-small" style="margin-bottom:4px;">OpenRouter API Key</label>
                   <input type="password" id="or-api-key" class="form-input text-small" placeholder="Örn: sk-or-v1-..." style="padding: 6px 10px;" onchange="saveApiKey()">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 8px;">
+                  <label class="form-label text-small" style="margin-bottom:4px;">Aktif Yapay Zeka Modeli</label>
+                  <select id="or-model-select" class="form-input text-small" style="padding: 6px 10px; background-color: rgba(255,255,255,0.03); color: #ffffff; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px;" onchange="saveModelSelection()">
+                    <option value="nousresearch/hermes-3-llama-3-70b">Nous-Hermes-3-Llama-3-70B (Önerilen)</option>
+                    <option value="moonshotai/kimi-k2.6">Moonshot Kimi K2.6 (1T MoE Agentic)</option>
+                    <option value="moonshotai/kimi-k2.6:free">Moonshot Kimi K2.6 (Ücretsiz)</option>
+                  </select>
                 </div>
                 
                 <div class="toggle-control-item" style="margin-top: 8px;">
