@@ -9,13 +9,7 @@ const appState = {
   currentNiche: 'Luxury Beauty',
   shieldActive: true,
   terminalHistory: [],
-  sessionSearchLogs: [
-    { title: "Amazon Associates Kayıt Onayı", content: "Amazon ABD associates paneli başarıyla onaylandı. ID: astraea0f-20", date: "2026-05-28" },
-    { title: "HeyGen Render İsteği", content: "HeyGen video ID 99281 için problem-çözüm kurgulu avatar başarıyla render edildi.", date: "2026-05-29" },
-    { title: "Repurpose.io Pipeline Bağlantısı", content: "Instagram Reels -> YouTube Shorts filigransız yönlendirme tüneli kuruldu.", date: "2026-05-30" },
-    { title: "Pinterest Link Enjeksiyonu", content: "ASIN B08X123456 için hazırlanan affiliate linki Pinterest pinine eklendi.", date: "2026-05-31" },
-    { title: "Hermes Agent v0.15 Kurulumu", content: "Nous Hermes v0.15 Velocity Release kurulumu yapıldı. 16K satırdan 3.8K satıra refactor başarılı.", date: "2026-05-31" }
-  ]
+  sessionSearchLogs: []
 };
 
 // Tabs Metadata for dynamic titles and descriptions
@@ -520,47 +514,7 @@ function togglePipelineChannel(channelId) {
 }
 
 function setupRepurposeSimulationLogs() {
-  const logConsole = document.getElementById('repurpose-logs-console');
-  
-  // Array of mock distribution events
-  const mockEvents = [
-    { tag: "tiktok", text: "Watermark removed. Successfully uploaded video segment ID 200 to TikTok." },
-    { tag: "youtube", text: "YouTube Shorts API: Metadata parsed successfully. Upload complete, status: Public." },
-    { tag: "pinterest", text: "Successfully pinned visual layout. Custom Amazon tag associates link injected successfully." },
-    { tag: "system", text: "Cron check: Repurpose.io sync status 100%. No broken redirect links." }
-  ];
-
-  // Tick simulation every 15 seconds to keep dashboard feeling "alive"
-  setInterval(() => {
-    // Check which channels are currently active
-    const activeChannels = [];
-    if (document.getElementById('switch-tiktok').checked) activeChannels.push('tiktok');
-    if (document.getElementById('switch-youtube').checked) activeChannels.push('youtube');
-    if (document.getElementById('switch-pinterest').checked) activeChannels.push('pinterest');
-    if (document.getElementById('switch-snapchat').checked) activeChannels.push('snapchat');
-
-    if (activeChannels.length === 0) return;
-
-    // Pick random active channel event
-    const randomChan = activeChannels[Math.floor(Math.random() * activeChannels.length)];
-    let eventText = "";
-
-    if (randomChan === 'pinterest') {
-      eventText = "Successfully pinned visual layout. Custom Amazon tag associates link injected successfully.";
-    } else if (randomChan === 'tiktok') {
-      eventText = "Watermark removed. Successfully uploaded video segment to TikTok Feed.";
-    } else if (randomChan === 'youtube') {
-      eventText = "YouTube Shorts API: Metadata parsed. Upload complete, status: Public.";
-    } else {
-      eventText = "Snapchat Spotlight routing successful. Tag links configured.";
-    }
-
-    const timeStr = new Date().toLocaleTimeString();
-    const newLog = document.createElement('div');
-    newLog.className = 'log-entry';
-    newLog.innerHTML = `<span class="log-time">[${timeStr}]</span> <span class="log-tag tag-${randomChan}">[${randomChan.toUpperCase()}]</span> ${eventText}`;
-    logConsole.insertBefore(newLog, logConsole.firstChild);
-  }, 12000);
+  // Mock simulation intervals removed for production release.
 }
 
 // ==========================================================================
