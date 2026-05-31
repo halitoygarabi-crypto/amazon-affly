@@ -931,6 +931,25 @@
                 </div>
               </div>
 
+              <!-- Real Telegram Bot Settings Card -->
+              <div class="settings-sub-card border-purple">
+                <h4 class="settings-sec-title">🤖 Gerçek Telegram Bot Entegrasyonu</h4>
+                <p class="text-muted text-small">Ajan otonom görevleri bitirdiğinde telefonunuza gerçek Telegram mesajları göndersin.</p>
+                
+                <div class="form-group" style="margin-bottom: 8px;">
+                  <label class="form-label text-small" style="margin-bottom:4px;">Bot Token (@BotFather'dan alınan)</label>
+                  <input type="password" id="tg-bot-token" class="form-input text-small" placeholder="Örn: 123456789:ABCdefGhIJKlmNo..." style="padding: 6px 10px;">
+                </div>
+                <div class="form-group" style="margin-bottom: 12px;">
+                  <label class="form-label text-small" style="margin-bottom:4px;">Chat ID (Kişisel Chat ID'niz)</label>
+                  <input type="text" id="tg-chat-id" class="form-input text-small" placeholder="Örn: 987654321" style="padding: 6px 10px;">
+                </div>
+                
+                <button class="boot-trigger-btn border-purple" style="width: 100%; padding: 8px; font-weight: 700; font-family: var(--font-display);" onclick="sendRealTelegramTest()">
+                  ⚡ Test Mesajı Gönder & Kaydet
+                </button>
+              </div>
+
             </div>
 
           </div>

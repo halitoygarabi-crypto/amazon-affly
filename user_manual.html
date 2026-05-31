@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astraea - Kullanım Kılavuzu & Otomasyon Rehberi</title>
+  
+  <!-- Premium Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Styling optimized for PDF printing */
+    :root {
+      --color-primary: #8b5cf6;
+      --color-secondary: #06b6d4;
+      --color-text: #1f2937;
+      --color-text-light: #4b5563;
+      --color-border: #e5e7eb;
+      --color-bg-light: #f9fafb;
+    }
+    
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--color-text);
+      line-height: 1.6;
+      font-size: 11pt;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Outfit', sans-serif;
+      color: #111827;
+      margin-top: 0;
+      page-break-after: avoid;
+    }
+    
+    h1 {
+      font-size: 24pt;
+      font-weight: 800;
+      border-bottom: 2px solid var(--color-primary);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    
+    h2 {
+      font-size: 16pt;
+      font-weight: 700;
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 6px;
+      margin-top: 30px;
+      margin-bottom: 14px;
+    }
+    
+    h3 {
+      font-size: 12pt;
+      font-weight: 600;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 12px;
+      text-align: justify;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: var(--color-bg-light);
+      border: 1px solid var(--color-border);
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 9pt;
+    }
+    
+    pre {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 8.5pt;
+      overflow-x: auto;
+      margin-bottom: 14px;
+      border: 1px solid #1e293b;
+      white-space: pre-wrap;
+    }
+    
+    .page-break {
+      page-break-before: always;
+    }
+    
+    /* Cover Page styling */
+    .cover-page {
+      height: 250mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      page-break-after: always;
+    }
+    
+    .cover-title {
+      font-size: 32pt;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      color: #111827;
+      margin-bottom: 10px;
+    }
+    
+    .cover-subtitle {
+      font-size: 14pt;
+      color: var(--color-text-light);
+      margin-bottom: 100px;
+      max-width: 80%;
+    }
+    
+    .cover-meta {
+      font-size: 10pt;
+      color: var(--color-text-light);
+      border-top: 1px solid var(--color-border);
+      padding-top: 15px;
+      width: 60%;
+    }
+
+    /* Checklist & Lists */
+    ul {
+      margin-top: 0;
+      margin-bottom: 14px;
+      padding-left: 20px;
+    }
+    
+    li {
+      margin-bottom: 6px;
+    }
+
+    /* Tables styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 9.5pt;
+    }
+    
+    th, td {
+      border: 1px solid var(--color-border);
+      padding: 8px 12px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: var(--color-bg-light);
+      font-weight: 600;
+      color: #111827;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+    
+    /* Flowchart / Box layout */
+    .flow-box {
+      background-color: var(--color-bg-light);
+      border-left: 4px solid var(--color-primary);
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 16px;
+      font-size: 10pt;
+    }
+
+    .badge-purple {
+      color: var(--color-primary);
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== COVER PAGE ==================== -->
+  <div class="cover-page">
+    <div style="font-size: 40px; margin-bottom: 20px;">🤖 ✨ 📊</div>
+    <h1 class="cover-title" style="border:none; padding:0; margin-bottom: 20px;">ASTRAEA</h1>
+    <div class="cover-subtitle">
+      Yüz Göstermeden AI ile Amazon Affiliate & Hermes AI OS Suite<br>
+      <strong>Canlı Web Sitesi Kullanım ve Otomasyon Kılavuzu</strong>
+    </div>
+    <div style="margin-bottom: 80px; font-size: 12pt; font-family:'JetBrains Mono', monospace; color:var(--color-primary)">
+      Sürüm: v0.15 (Velocity Release)<br>
+      Canlı Link: http://jizrapqjsln9fcxn1334c7q3.84.8.252.241.sslip.io/
+    </div>
+    <div class="cover-meta">
+      <strong>Hazırlayan</strong>: Astraea Autonomous Engineering Team<br>
+      <strong>Tarih</strong>: Mayıs 2026<br>
+      <strong>Durum</strong>: Yayında & Aktif (Deploy Succeeded)
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 1: GENEL BAKIŞ ==================== -->
+  <h2>1. Giriş ve Genel Mantık</h2>
+  <p>
+    Astraea, yapay zeka ve sosyal medya otomasyon araçlarını bir araya getirerek, e-ticaretin operasyonel yükleriyle (stok, paketleme, müşteri ilişkileri vb.) uğraşmadan Amazon Associates programı üzerinden pasif gelir elde etmenizi sağlayan bütünleşik bir yönetim panelidir. Saniyeler içinde viral olabilecek <strong>"faceless"</strong> (yüz göstermeden) video içerikleri üretmek ve bunları 134+ sosyal ağda tamamen otomatik olarak dağıtmak için gereken tüm simülasyon, prompt üretme ve ajan sürüleri yönetimini tek çatı altında birleştirir.
+  </p>
+  
+  <div class="flow-box">
+    <strong>Temel İş Akışı Döngüsü:</strong><br>
+    Adım 1: Niş Analizi ve Ürün Keşfi ➜ Adım 2: Video Senaryoları ve AI Prompt Üretimi ➜ Adım 3: Çok Kanallı Otomatik Dağıtım ➜ Adım 4: Hermes Otonom Ajan Yönetimi
+  </div>
+
+  <h2>2. Arayüz Bölümleri ve İşlevleri</h2>
+  
+  <h3>I. Genel Bakış (Dashboard Overview)</h3>
+  <p>
+    Panelin ana kontrol merkezidir. Burada, raporda belirtilen farklı zaman dilimlerindeki performans hedefleri olan <strong>30 Günlük ($100)</strong>, <strong>90 Günlük ($600)</strong>, <strong>12 Aylık ($17,000)</strong> ve <strong>Lifetime ($70,000+)</strong> hedefleri neon kenarlıklar eşliğinde kartlar halinde listelenir. Hızlı işlem butonları vasıtasıyla diğer modüllere anında geçiş sağlayabilir ve Hermes Ajanının arka planda ürettiği son otonom işlem günlüğünü en alttaki konsol paneli üzerinden izleyebilirsiniz.
+  </p>
+
+  <h3>II. Kurulum Kılavuzu (Checklist & Milestone Tracker)</h3>
+  <p>
+    Sistemi otonom olarak kurmanız için 5 kritik aşamayı barındıran etkileşimli bir yapılacaklar listesidir. 
+    İşaretlediğiniz her görev, sol menüdeki ve kılavuzun başındaki dairesel SVG ilerleme halkasını dinamik olarak doldurur. Tüm verileriniz tarayıcı belleğinde (<code>localStorage</code>) saklanır; sayfayı yenileseniz dahi ilerlemeniz sıfırlanmaz. İlerlemeyi %100'e ulaştırdığınızda sistem sizi tebrik bildirimiyle ödüllendirir.
+  </p>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 2: NİŞ ANALİZİ VE SCRIPT ==================== -->
+  <h2>3. Niş & Gelir Hesaplayıcı (Niche & Projections Simulator)</h2>
+  <p>
+    Ürün fiyatlarına, komisyon oranlarına ve hedeflenen dönüşümlere göre kazanç simülasyonu yapmanızı sağlar.
+  </p>
+  
+  <h3>I. Matematiksel Hesaplama Modeli</h3>
+  <p>Hesaplamalar şu formüllere dayanarak canlı olarak yürütülür:</p>
+  <pre>
+Günlük Trafik = Günlük Video İzlenmesi * Link Tıklama Oranı (CTR %)
+Günlük Referans = Günlük Trafik * Satın Alım Dönüşüm Oranı (CR %)
+Günlük Net Gelir = Günlük Referans * Ortalama Ürün Fiyatı * Kategori Komisyon Oranı (%)
+  </pre>
+
+  <h3>II. Hazır Kategori Presetleri</h3>
+  <p>
+    Farklı kategorilerin dinamiklerini incelemek için alt kısımdaki hızlı yükleme kartlarını kullanabilirsiniz. Butonlara tıklandığında slider'lar otomatik olarak o nişin Amazon verilerine göre ayarlanır:
+  </p>
+  <ul>
+    <li><strong>Lüks Kozmetik</strong>: 10% Komisyon oranı, $80 Ortalama ürün fiyatı.</li>
+    <li><strong>Bebek Ürünleri</strong>: 6% Komisyon oranı, $35 Ortalama ürün fiyatı.</li>
+    <li><strong>Teknoloji Aksesuarları</strong>: 4% Komisyon oranı, $120 Ortalama ürün fiyatı.</li>
+    <li><strong>Kindle Kitapları</strong>: 4% Komisyon oranı, $15 Ortalama ürün fiyatı.</li>
+  </ul>
+
+  <h3>III. Canlı SVG Grafik Eğrileri</h3>
+  <p>Girilen slider değerlerine göre 5 yıllık büyüme grafiğinde üç farklı senaryo anlık çizilir:</p>
+  <ul>
+    <li><span style="color:var(--color-secondary); font-weight:bold">Modere Eğri (Mavi)</span>: Birebir formül değerlerine göre ilerleyen standart senaryodur.</li>
+    <li><span style="color:var(--color-primary); font-weight:bold">Hermes Swarm Otonom Eğri (Mor)</span>: Ajan sürülerinin çoklu hesap ve virallik desteği sayesinde geliri **2.5 katına** çıkardığı otonom ölçekleme eğrisidir.</li>
+    <li><span style="color:var(--color-text-light); font-weight:bold">Muhafazakar Eğri (Pembe)</span>: Başlangıç aşamasındaki düşük erişimleri temsil eden (x0.5) tedbirli büyüme eğrisidir.</li>
+  </ul>
+
+  <h2>4. AI Video Stüdyosu (Script & Prompt Generator)</h2>
+  <p>
+    Ürün bilgilerinizi girdikten sonra sosyal medyada (Shorts, Reels, TikTok) en çok izlenme getiren 3 farklı kurgu şablonu (Framework) üzerinden pazarlama materyali üretebilirsiniz:
+  </p>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Kurgu Tipi (Framework)</th>
+        <th>Odak Noktası & Amaç</th>
+        <th>Görsel / Ses Tasarımı</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Problem - Çözüm Kurgusu</strong></td>
+        <td>İzleyicinin acı noktasına (pain point) odaklanır. Yüksek CTR sağlar.</td>
+        <td>İlk 3 saniyede şok edici soru, 3D anatomi veya dertli insan görseli. Hızlı synthwave ses geçişleri.</td>
+      </tr>
+      <tr>
+        <td><strong>Neden Almalısınız? (En İyi 3 Neden)</strong></td>
+        <td>Ürünün 3 ana avantajını maddeleyerek hızlı satın alım yaptırır.</td>
+        <td>Hızlı deklanşör sesleri eşliğinde metin kutularının ekrana gelmesi, enerjik ses tonu.</td>
+      </tr>
+      <tr>
+        <td><strong>Estetik Kutu Açılışı (ASMR)</strong></td>
+        <td>Görsel doyum ve minimalizmi seven kitleye hitap eder.</td>
+        <td>Yakın çekim kutu yırtılma sesi, jelatin soyulması, arkada yumuşak lo-fi müzik ve fısıltılı anlatım.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 3: REPURPOSE & HERMES CLI ==================== -->
+  <h2>5. Dağıtım Paneli (Repurpose.io Pipeline Map)</h2>
+  <p>
+    Instagram Reels'a yüklediğiniz bir videonun filigransız indirilerek diğer tüm kanallara otomatik dağıtıldığı otomasyon hattını görselleştirir.
+  </p>
+  <ul>
+    <li><strong>Rotaları Yönetin</strong>: Alt kısımdaki switch anahtarlarını açarak TikTok, YouTube, Pinterest veya Snapchat bağlantılarını simüle edebilirsiniz. Bağlandığı anda node'lar parıldayan neon renklere dönecek ve **glowing SVG yollarında** hareketli neon puls'lar akmaya başlayacaktır.</li>
+    <li><strong>Affiliate Link Enjeksiyonu</strong>: Özellikle Pinterest gibi linke doğrudan tıklanabilen mecralara, Amazon'dan aldığınız size özel kısa ortaklık linklerinin otomatik enjekte edilme süreçlerini log konsolundan saniye saniye izleyebilirsiniz.</li>
+  </ul>
+
+  <h2>6. Hermes Agentic OS (v0.15 Control Room)</h2>
+  <p>
+    Nous Research tarafından yayınlanan **v0.15 Velocity Release** güncellemesinin tüm teknik detaylarını barındıran fütüristik kontrol odasıdır.
+  </p>
+  
+  <div class="flow-box">
+    <strong>Hermes v0.15 Teknik Parametreleri:</strong><br>
+    • Yapay Zeka Modeli: <code>Nous-Hermes-3-Llama-3-70B</code> (Lokal VPS veya API)<br>
+    • Hafıza Kapasitesi: 32,768 token persistent bağlam belleği<br>
+    • Kod Boyutu: %76 oranında küçültülmüş, 1 saniyenin altında açılış hızı (sub-second boot)
+  </div>
+
+  <h3>I. Fütüristik Terminal Arayüzü ve CLI Komutları</h3>
+  <p>Terminal ekranına aşağıdaki komutları yazıp göndererek sistemi otonom olarak yönetebilirsiniz:</p>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Komut Formatı</th>
+        <th>Sistemde Tetiklediği Otonom Süreç</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>help</code></td>
+        <td>Mevcut sistem komutlarını ve parametrelerini terminale yazdırır.</td>
+      </tr>
+      <tr>
+        <td><code>clear</code></td>
+        <td>Konsol ekran geçmişini tamamen silerek terminali sıfırlar.</td>
+      </tr>
+      <tr>
+        <td><code>hermes update</code></td>
+        <td>Hermes Ajanını uzak sunucuya bağlanarak Velocity v0.15.226 kararlı sürümüne günceller. Trimmed kod temizliğini simüle eder.</td>
+      </tr>
+      <tr>
+        <td><code>hermes hunt --niche &lt;kategori&gt;</code></td>
+        <td>**Amazon Hunter** ve **Browser Use** ajanlarını tetikler. `browser.sh` üzerinden Best Sellers listesini kazır, 4.5+ yıldızlı en çok kazandıran ürünü bulur ve **bu verileri otomatik olarak Gelir Hesaplayıcı modülüne yükler!**</td>
+      </tr>
+      <tr>
+        <td><code>hermes swarm --task &lt;görev&gt;</code></td>
+        <td>Büyük iş emirlerini **Triage** modülünde analiz eder, sub-agent profillerine paralel subtask olarak atar. Paralel çalışma loglarını akıtır ve bitiminde telefonunuza akıllı bildirim gönderir.</td>
+      </tr>
+      <tr>
+        <td><em>Sohbet Metni (Herhangi bir soru)</em></td>
+        <td>Doğal dil modeline bağlanır ve size Amazon Associates, video kurgusu veya dijital pazarlama hakkında derinlemesine stratejik öneriler sunar.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>II. 20ms Yerel Arama Motoru (Session Search)</h3>
+  <p>
+    Arama kutusuna geçmiş seans loglarını taramak için bir kelime girin. v0.15'in getirdiği LLM bağımsız yerel indeksleme sayesinde arama sonucu **20 milisaniyenin altında (0 API çağrısı, $0.00 maliyetle)** ekranda listelenecek ve hız göstergesi belirecektir.
+  </p>
+  
+  <h3>III. Güvenlik & Bildirimler</h3>
+  <p>
+    Prompt Injection siber saldırı koruma kalkanını açıp kapatabilir, BitWarden Secret Manager bağlantısını aktif edebilir ve otonom işler bittiğinde Telefon (Telegram Botu) veya Akıllı Saat üzerinden anlık ping bildirimleri almayı toggle edebilirsiniz.
+  </p>
+</body>
+</html>

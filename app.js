@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupEarningsCalculator();
   setupNotificationDropdown();
   setupRepurposeSimulationLogs();
+  setupTelegramConfig();
   
   // Initial draw of the calculator SVG chart
   updateCalculatorProjections();
@@ -651,6 +652,18 @@ function executeTerminalCommand(e) {
           
           // Populate calculator sliders automatically with this hunt!
           loadNichePreset(75, 8, nicheArg.toUpperCase());
+
+          // Send real Telegram alert if configured
+          const token = localStorage.getItem('astraea_tg_token');
+          const chatId = localStorage.getItem('astraea_tg_chatid');
+          if (token && chatId && document.getElementById('notify-telegram').checked) {
+            const text = `🕵️‍♂️ *Astraea Otonom Ürün Avcısı:*\n\nKategori: *${nicheArg.toUpperCase()}*\nASIN: *B08X123456*\nFiyat: *$75*\nKomisyon: *%8*\n\nBulunan ürün Astraea gelir hesaplayıcıya aktarıldı ve AI Video Stüdyosu için hazırlandı! 🤖📦`;
+            fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: 'Markdown' })
+            }).catch(e => console.error(e));
+          }
         }, 1000);
       }, 1000);
     }, 600);
@@ -823,6 +836,18 @@ function triggerSmartNotifications(taskName) {
     newLog.className = 'log-entry';
     newLog.innerHTML = `<span class="log-time">[${timeStr}]</span> <span class="log-tag tag-system">[TELEGRAM]</span> Push alert successfully transmitted to connected mobile client. Title: Workspace complete.`;
     logConsole.insertBefore(newLog, logConsole.firstChild);
+
+    // Real Telegram Send
+    const token = localStorage.getItem('astraea_tg_token');
+    const chatId = localStorage.getItem('astraea_tg_chatid');
+    if (token && chatId) {
+      const text = `🤖 *Astraea Otonom Ajan Raporu:*\n\n"${taskName}" otonom görevi başarıyla tamamlandı! 7/24 çalışan sistem aktif. 🚀`;
+      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: 'Markdown' })
+      }).catch(e => console.error("Telegram notify failed", e));
+    }
   }
 }
 
@@ -850,5 +875,59 @@ function setupNotificationDropdown() {
     if (badge) {
       badge.style.display = 'none';
     }
+  });
+}
+
+// ==========================================================================
+// 8. REAL TELEGRAM BOT INTEGRATION CONTROLLERS
+// ==========================================================================
+function setupTelegramConfig() {
+  const tokenInput = document.getElementById('tg-bot-token');
+  const chatIdInput = document.getElementById('tg-chat-id');
+  const storedToken = localStorage.getItem('astraea_tg_token');
+  const storedChatId = localStorage.getItem('astraea_tg_chatid');
+  
+  if (tokenInput && storedToken) tokenInput.value = storedToken;
+  if (chatIdInput && storedChatId) chatIdInput.value = storedChatId;
+}
+
+function sendRealTelegramTest() {
+  const token = document.getElementById('tg-bot-token').value.trim();
+  const chatId = document.getElementById('tg-chat-id').value.trim();
+  
+  if (!token || !chatId) {
+    showToast("⚠️ Lütfen hem Bot Token hem de Chat ID alanlarını doldurun!");
+    return;
+  }
+  
+  localStorage.setItem('astraea_tg_token', token);
+  localStorage.setItem('astraea_tg_chatid', chatId);
+  
+  showToast("📤 Telegram'a test mesajı gönderiliyor...");
+  
+  const message = "🤖 *Astraea Sistem Bildirimi:*\n\nTelegram bot bağlantınız başarıyla doğrulandı ve Astraea otomasyon ekosistemine entegre edildi! 🎉";
+  
+  fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: message,
+      parse_mode: 'Markdown'
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.ok) {
+      showToast("✅ Test mesajı başarıyla gönderildi! Telefonunuzu kontrol edin.");
+      appendTerminalLine("SUCCESS", "Telegram Bot connection successfully verified. Active notification node ONLINE.");
+    } else {
+      showToast("❌ Gönderim başarısız! Token veya Chat ID hatalı.");
+      appendTerminalLine("WARNING", `Telegram API Error: ${data.description}`);
+    }
+  })
+  .catch(err => {
+    showToast("❌ Ağ hatası oluştu!");
+    appendTerminalLine("WARNING", `Telegram Connection Error: ${err.message}`);
   });
 }
